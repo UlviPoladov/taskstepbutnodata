@@ -1,0 +1,48 @@
+﻿@page
+@model WebApplication3.Pages.Product.IndexModel
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h2>Products</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Discount</th>
+            <th>Image Link</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td>@product.Discount</td>
+                <td><img src="@product.ImageLink" alt="@product.Name" style="width:50px;"/></td>
+                <td>
+                    <form method="post">
+                        <input type="hidden" name="id" value="@product.Id" />
+                        <button type="submit" asp-page-handler="Delete">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Add New Product</h3>
+<form method="post">
+    <input type="text" name="product.Name" placeholder="Name" />
+    <input type="text" name="product.Description" placeholder="Description" />
+    <input type="text" name="product.Price" placeholder="Price" />
+    <input type="text" name="product.Discount" placeholder="Discount" />
+    <input type="text" name="product.ImageLink" placeholder="Image Link" />
+    <button type="submit" asp-page-handler="Create">Add</button>
+</form>
